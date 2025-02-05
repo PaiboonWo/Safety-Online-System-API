@@ -2,7 +2,7 @@ const express = require("express");
 const oracledb = require("oracledb");
 const multer = require("multer");
 const app = express();
-const { ConnectPG_DB, DisconnectPG_DB, ConnectOracleDB } = require("../Connection/Conect_database.cjs");
+const { ConnectPG_DB, DisconnectPG_DB, ConnectOracleDB } = require("../../Connection/Conect_database.cjs");
 const path = require("path");
 // const uploadsPath = path.join(
 //   "/PROJECT_REACT_WORK/MRG_FAA_PROJECT/DEPLOY/SERVICE_TEST_DEPLOY/MGR_FAA_SERVICE/FAA_service/UploadFileImage"

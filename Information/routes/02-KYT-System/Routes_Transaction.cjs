@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const serverTransaction = require("../WorkService/Model_Transection.cjs");
+const serverTransaction = require("../../WorkService/02-KYT-System/Model_Transection.cjs");
 
 router.post("/trans_gettransissuesearch", serverTransaction.GetTransIssueSearch);
 router.post("/trans_gettransdocno", serverTransaction.GetTransDocNo);

@@ -28,13 +28,12 @@ app.use((req, res, next) => {
   next();
 });
 
-const Common = require("./Information/routes/Routes_Common.cjs");
-const Transaction = require("./Information/routes/Routes_Transaction.cjs");
+const KYT_Common = require("./Information/routes/02-KYT-System/Routes_Common.cjs");
+const KYT_Transaction = require("./Information/routes/02-KYT-System/Routes_Transaction.cjs");
 
-// Common
-app.use("/api/Common", Common);
-// Transection
-app.use("/api/Transection", Transaction);
+// KYT System
+app.use("/api/KYT_System/Common", KYT_Common);
+app.use("/api/KYT_System/Transection", KYT_Transaction);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

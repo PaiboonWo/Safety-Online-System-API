@@ -6,8 +6,8 @@ const {
   DisconnectPG_DB,
   ConnectOracleDB,
   DisconnectOracleDB,
-} = require("../Connection/Conect_database.cjs");
-const { writeLogError } = require("../Common/LogFunction.cjs");
+} = require("../../Connection/Conect_database.cjs");
+const { writeLogError } = require("../../Common/LogFunction.cjs");
 const path = require("path");
 // const uploadsPath = path.join(
 //   "/PROJECT_REACT_WORK/MRG_FAA_PROJECT/DEPLOY/SERVICE_TEST_DEPLOY/MGR_FAA_SERVICE/FAA_service/UploadFileImage"
