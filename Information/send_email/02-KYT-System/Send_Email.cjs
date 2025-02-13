@@ -18,7 +18,7 @@ const smtpConfig = {
 const transporter = nodemailer.createTransport(smtpConfig);
 
 // สร้าง API ส่ง Email
-router.post("/sendEmail", async (req, res) => {
+router.post("/IssueandApproveEmail", async (req, res) => {
   try {
     const mailOptions = {
       from: "KYT@th.fujikura.com",
