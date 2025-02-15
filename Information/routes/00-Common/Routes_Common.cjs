@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const serverCommon = require("../../WorkService/02-KYT-System/Model_Common.cjs");
+const serverCommon = require("../../WorkService/00-Common/Model_Common.cjs");
 
 router.post("/common_getfactory", serverCommon.GetFactory);
 router.post("/common_getcostcenter", serverCommon.GetCostCenter);
