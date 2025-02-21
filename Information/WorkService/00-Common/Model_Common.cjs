@@ -2,11 +2,8 @@ const express = require("express");
 const oracledb = require("oracledb");
 const multer = require("multer");
 const app = express();
-const { ConnectPG_DB, DisconnectPG_DB, ConnectOracleDB } = require("../../Connection/Conect_database.cjs");
+const { ConnectPG_DB, DisconnectPG_DB, ConnectOracleDB ,DisconnectOracleDB} = require("../../Connection/Conect_database.cjs");
 const path = require("path");
-// const uploadsPath = path.join(
-//   "/PROJECT_REACT_WORK/MRG_FAA_PROJECT/DEPLOY/SERVICE_TEST_DEPLOY/MGR_FAA_SERVICE/FAA_service/UploadFileImage"
-// );
 const fs = require("fs");
 require("dotenv").config();
 
@@ -148,7 +145,29 @@ module.exports.GetUserLogin = async function (req, res) {
 };
 
 
-// SELECT "CUSR".kyt_005_get_usernamemember(:p_empid);
-
+module.exports.GetKytSuggesTionApprover = async function (req, res) {
+  var query = "";
+  try {
+    const { p_factory, p_costcenter } = req.body;
+    console.log("GetKytSuggesTionApprover", p_factory, p_costcenter);
+    const client = await ConnectOracleDB("QAD");
+    query += `
+          select t.spm_user_login as app_user,'['||t.spm_emp_id||'] '||m.user_fname||' '|| m.user_surname as app_name
+          from HR.sg_person_master t,CUSR.cu_user_m m
+          where t.spm_user_login = m.user_login 
+              and  t.spm_level = 'PLV001' and t.spm_person_sts = 'A'
+              and t.spm_factory = '${p_factory}'
+              and t.spm_costcenter = '${p_costcenter}'
+          order by m.user_fname
+      `;
+    const result = await client.execute(query);
+    console.log("Data kyt_get_kytsuggestionApprover", result.rows);
+    res.status(200).json(result.rows);
+    DisconnectOracleDB(client);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 

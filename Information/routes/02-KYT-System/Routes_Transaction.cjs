@@ -4,7 +4,6 @@ const serverTransaction = require("../../WorkService/02-KYT-System/Model_Transec
 
 router.post("/trans_gettrans_issue_approve_masterlist_search", serverTransaction.GetTransIssue_Approve_Masterlist_Search);
 router.post("/trans_gettransdocno", serverTransaction.GetTransDocNo);
-router.post("/trans_getkytsuggestionapprover", serverTransaction.GetKytSuggesTionApprover);
 router.post("/insupd_trans_insupdtransissuekytrecord", serverTransaction.InsUpdTransIssuekytRecord);
 router.post("/trans_geteditissuekytrecord", serverTransaction.GetEditIssuekytRecord);
 router.post("/insupd_trans_insupdtransissuekytmember", serverTransaction.InsUpdTransIssuekytMember);
