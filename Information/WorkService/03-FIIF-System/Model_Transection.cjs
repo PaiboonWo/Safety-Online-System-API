@@ -74,3 +74,45 @@ module.exports.Trans_DeleteIssueFIIFRecord = async function (req, res) {
     res.status(500).json({ message: error.message });
   }
 };
+
+module.exports.Trans_InsupdIssueFIIFRecord = async function (req, res) {
+  var query = "";
+  try {
+    const { dataList } = req.body;
+    const json_convertdata = JSON.stringify(dataList);
+    console.log("InsUpdTransIssuekytRecord", json_convertdata);
+    const client = await ConnectPG_DB();
+    query += `CALL "GC".safety_fiif_003_trans_insupd_issuefiifrecord('[${json_convertdata}]','')`;
+    const result = await client.query(query);
+    console.log(
+      "DATA SHOW safety_fiif_003_trans_insupd_issuefiifrecord : ",
+      result.rows
+    );
+    if (result.rows.length > 0) {
+      res.status(200).json(result.rows);
+      DisconnectPG_DB(client);
+    }
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+module.exports.Trans_GetEditIssueFIIFRecord = async function (req, res) {
+  var query = "";
+  try {
+    const client = await ConnectPG_DB();
+    const { dataList } = req.body;
+    const json_convertdata = JSON.stringify(dataList);
+    console.log("GetEditIssuekytRecord", json_convertdata);
+    query += `SELECT * from "GC".safety_fiif_005_trans_geteditissuefiifrecord('[${json_convertdata}]')`;
+    const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
+    res.status(200).json(filteredResult);
+    DisconnectPG_DB(client);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
