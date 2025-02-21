@@ -41,6 +41,7 @@ const KYT_Transaction = require("./Information/routes/02-KYT-System/Routes_Trans
 const KYT_DataEmail = require("./Information/routes/02-KYT-System/Routes_Dataemail.cjs");
 const KYT_SendMail = require("./Information/send_email/02-KYT-System/Send_Email.cjs");
 const FIIF_Transaction = require("./Information/routes/03-FIIF-System/Routes_Transaction.cjs");
+const WKP_Transaction = require("./Information/routes/04-Work-Permit-System/Routes_Transaction.cjs");
 
 // Common
 app.use("/api/Common",Common);
@@ -52,6 +53,9 @@ app.use("/api/KYT_System/SendEmail", KYT_SendMail);
 
 // FIIF System
 app.use("/api/FIIF_System/Transection", FIIF_Transaction);
+
+// Work Permit System
+app.use("/api/WKP_System", WKP_Transaction);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

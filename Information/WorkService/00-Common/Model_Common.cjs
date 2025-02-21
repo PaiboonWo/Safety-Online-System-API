@@ -84,15 +84,15 @@ module.exports.GetStatus = async function (req, res) {
 
 module.exports.GetUserName = async function (req, res) {
   const { userlogin } = req.body;
-  console.log(userlogin,"userlogin")
+  console.log(userlogin, "userlogin")
   try {
     const get_username = `SELECT "CUSR".kyt_004_get_username($1)`;
     const client = await ConnectPG_DB();
-    const result_get_username = await client.query(get_username, [userlogin]); 
+    const result_get_username = await client.query(get_username, [userlogin]);
     await DisconnectPG_DB(client);
     console.log(result_get_username.rows, "ผลลัพธ์จากฐานข้อมูล");
 
-   
+
     const jsonData = result_get_username.rows.map((row) => {
       const rawData = row.kyt_004_get_username.replace(/^\((.*)\)$/, "$1");
       const values = rawData.split(",").map((value) => value.replace(/"/g, ""));
@@ -117,12 +117,12 @@ module.exports.GetMemberUserName = async function (req, res) {
   let query = "";
   try {
     const { p_empid } = req.body;
-    console.log("GetMemberusername",p_empid);
+    console.log("GetMemberusername", p_empid);
     const client = await ConnectPG_DB();
     query += `SELECT * from "CUSR".kyt_005_get_usernamemember('${p_empid}')`;
     const result = await client.query(query);
     await DisconnectPG_DB(client);
-    console.log("DATA SHOW GetMemberusername : ",result.rows)
+    console.log("DATA SHOW GetMemberusername : ", result.rows)
     res.status(200).json(result.rows[0]);
   } catch (error) {
     writeLogError(error.message, query);
@@ -134,12 +134,12 @@ module.exports.GetUserLogin = async function (req, res) {
   let query = "";
   try {
     const { p_userlogin } = req.body;
-    console.log("kyt_GetUserLogin",p_userlogin);
+    console.log("kyt_GetUserLogin", p_userlogin);
     const client = await ConnectPG_DB();
     query += `SELECT * from "CUSR".kyt_000_get_userlogin('${p_userlogin}')`;
     const result = await client.query(query);
     await DisconnectPG_DB(client);
-    console.log("DATA SHOW kyt_000_get_userlogin : ",result.rows)
+    console.log("DATA SHOW kyt_000_get_userlogin : ", result.rows)
     res.status(200).json(result.rows[0]);
   } catch (error) {
     writeLogError(error.message, query);
@@ -149,6 +149,23 @@ module.exports.GetUserLogin = async function (req, res) {
 
 
 // SELECT "CUSR".kyt_005_get_usernamemember(:p_empid);
+
+module.exports.GetRequester = async function (req, res) {
+  let query = "";
+  try {
+    const { struserlogin } = req.body;
+    console.log("kyt_requester", struserlogin);
+    const client = await ConnectPG_DB();
+    query += `SELECT * FROM "CUSR".wkp_000_get_requester('${struserlogin}')`;
+    const result = await client.query(query);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW kyt_000_get_userlogin : ", result.rows)
+    res.status(200).json(result.rows);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 
 

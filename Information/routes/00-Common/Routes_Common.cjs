@@ -8,4 +8,5 @@ router.post("/common_getstatus", serverCommon.GetStatus);
 router.post("/common_getusername", serverCommon.GetUserName);
 router.post("/common_getmemberusername", serverCommon.GetMemberUserName); 
 router.post("/common_getuserlogin", serverCommon.GetUserLogin); 
+router.post("/common_getrequester", serverCommon.GetRequester); 
 module.exports = router;
