@@ -41,7 +41,7 @@ module.exports.GetTransIssue_Approve_Masterlist_Search = async function (req, re
         const { dataList } = req.body;
         const json_convertdata = JSON.stringify(dataList);
         console.log("GetTransIssue_Approve_Masterlist_Search", json_convertdata);
-        query += `SELECT * from "GC".wkp_002_trans_getissue_approve_masterlist_search('[${json_convertdata}]')`;
+        query += `SELECT * from "GC".satety_wkp_001_mlist_getissue_approve_masterlist_search('[${json_convertdata}]')`;
         const result = await client.query(query);
         const filteredResult = result.rows.map((row) => row.response);
         console.log("wkp", filteredResult);
