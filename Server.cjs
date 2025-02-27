@@ -43,6 +43,8 @@ const KYT_SendMail = require("./Information/send_email/02-KYT-System/Send_Email.
 const KYT_Common = require("./Information/routes/02-KYT-System/Routes_Common.cjs");
 const FIIF_Transaction = require("./Information/routes/03-FIIF-System/Routes_Transaction.cjs");
 const FIIF_MasterList = require("./Information/routes/03-FIIF-System/Routes_MasterList.cjs");
+const FIIF_DataEmail = require("./Information/routes/03-FIIF-System/Routes_Dataemail.cjs");
+const FIIF_SendMail = require("./Information/send_email/03-FIIF-System/Send_Email.cjs");
 const FIIF_Common = require("./Information/routes/03-FIIF-System/Routes_Common.cjs");
 const WKP_MasterList = require("./Information/routes/04-Work-Permit-System/Routes_Masterlist.cjs");
 
@@ -58,6 +60,8 @@ app.use("/api/KYT_System/Common", KYT_Common);
 // FIIF System
 app.use("/api/FIIF_System/Transection", FIIF_Transaction);
 app.use("/api/FIIF_System/MasterList", FIIF_MasterList);
+app.use("/api/FIIF_System/DataEmail", FIIF_DataEmail);
+app.use("/api/FIIF_System/SendEmail", FIIF_SendMail);
 app.use("/api/FIIF_System/Common", FIIF_Common);
 
 // Work Permit System
