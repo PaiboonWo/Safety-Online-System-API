@@ -10,4 +10,7 @@ router.post("/common_getmemberusername", serverCommon.GetMemberUserName);
 router.post("/common_getuserlogin", serverCommon.GetUserLogin); 
 router.post("/common_getkytsuggestionapprover", serverCommon.GetKytSuggesTionApprover);
 router.post("/common_getrequester", serverCommon.GetRequester); 
+router.post("/common_getroleuser", serverCommon.GetRoleUser); 
+router.post("/common_getloginapprove", serverCommon.GetLoginApprove); 
+
 module.exports = router;

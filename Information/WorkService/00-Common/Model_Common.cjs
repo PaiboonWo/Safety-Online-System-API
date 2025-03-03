@@ -188,5 +188,36 @@ module.exports.GetRequester = async function (req, res) {
   }
 };
 
+module.exports.GetRoleUser = async function (req, res) {
+  let query = "";
+  try {
+    const { p_empid } = req.body;
+    console.log("GetRoleUser", p_empid);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "CUSR".safety_fiif_002_comm_get_role_user('${p_empid}')`;
+    const result = await client.query(query);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_fiif_002_comm_get_role_user : ", result.rows)
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
 
-
+module.exports.GetLoginApprove = async function (req, res) {
+  let query = "";
+  try {
+    const { p_empid } = req.body;
+    console.log("GetLoginApprove", p_empid);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "CUSR".safety_fiif_003_comm_get_login_approve('${p_empid}')`;
+    const result = await client.query(query);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_fiif_003_comm_get_login_approve : ", result.rows)
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
