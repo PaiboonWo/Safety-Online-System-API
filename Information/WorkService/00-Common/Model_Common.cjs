@@ -130,14 +130,14 @@ module.exports.GetMemberUserName = async function (req, res) {
 module.exports.GetUserLogin = async function (req, res) {
   let query = "";
   try {
-    const { p_userlogin } = req.body;
-    console.log("kyt_GetUserLogin", p_userlogin);
+    const { p_emp_id , p_status_check } = req.body;
+    console.log("GetUserLogin", p_emp_id,p_status_check);
     const client = await ConnectPG_DB();
-    query += `SELECT * from "CUSR".kyt_000_get_userlogin('${p_userlogin}')`;
+    query += `SELECT * from "CUSR".safety_all_001_comm_get_userlogin('${p_emp_id}','${p_status_check}')`;
     const result = await client.query(query);
     await DisconnectPG_DB(client);
-    console.log("DATA SHOW kyt_000_get_userlogin : ", result.rows)
-    res.status(200).json(result.rows[0]);
+    console.log("DATA SHOW safety_all_001_comm_get_userlogin : ", result.rows)
+    res.status(200).json(result.rows);
   } catch (error) {
     writeLogError(error.message, query);
     res.status(500).json({ message: error.message });
@@ -191,14 +191,15 @@ module.exports.GetRequester = async function (req, res) {
 module.exports.GetRoleUser = async function (req, res) {
   let query = "";
   try {
-    const { p_empid } = req.body;
-    console.log("GetRoleUser", p_empid);
+    const { p_emp_id } = req.body;
+    console.log("GetRoleUser", p_emp_id);
     const client = await ConnectPG_DB();
-    query += `SELECT * from "CUSR".safety_fiif_002_comm_get_role_user('${p_empid}')`;
+    query += `SELECT * from "CUSR".safety_all_002_comm_get_role_user('${p_emp_id}')`;
     const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
     await DisconnectPG_DB(client);
-    console.log("DATA SHOW safety_fiif_002_comm_get_role_user : ", result.rows)
-    res.status(200).json(result.rows[0]);
+    console.log("DATA SHOW safety_all_002_comm_get_role_user : ", filteredResult)
+    res.status(200).json(filteredResult);
   } catch (error) {
     writeLogError(error.message, query);
     res.status(500).json({ message: error.message });
@@ -208,14 +209,34 @@ module.exports.GetRoleUser = async function (req, res) {
 module.exports.GetLoginApprove = async function (req, res) {
   let query = "";
   try {
-    const { p_empid } = req.body;
-    console.log("GetLoginApprove", p_empid);
+    const { p_userlogin , p_password  } = req.body;
+    console.log("GetLoginApprove", p_userlogin,p_password);
     const client = await ConnectPG_DB();
-    query += `SELECT * from "CUSR".safety_fiif_003_comm_get_login_approve('${p_empid}')`;
+    query += `SELECT * from "CUSR".safety_all_003_comm_get_login_approve('${p_userlogin}','${p_password}')`;
     const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
     await DisconnectPG_DB(client);
-    console.log("DATA SHOW safety_fiif_003_comm_get_login_approve : ", result.rows)
-    res.status(200).json(result.rows[0]);
+    console.log("DATA SHOW safety_all_003_comm_get_login_approve : ", filteredResult)
+    res.status(200).json(filteredResult);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+module.exports.GetForgotPassword = async function (req, res) {
+  let query = "";
+  try {
+    const { p_userlogin , p_email  } = req.body;
+    console.log("GetForgotPassword", p_userlogin,p_email);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "CUSR".safety_all_004_comm_get_forgotpassword('${p_userlogin}','${p_email}')`;
+    const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_all_004_comm_get_forgotpassword : ", filteredResult)
+    res.status(200).json(filteredResult);
   } catch (error) {
     writeLogError(error.message, query);
     res.status(500).json({ message: error.message });

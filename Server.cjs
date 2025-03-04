@@ -37,6 +37,7 @@ app.use((req, res, next) => {
 });
 
 const Common = require("./Information/routes/00-Common/Routes_Common.cjs");
+const Common_SendMail = require("./Information/send_email/00-Common/Send_Email.cjs");
 const KYT_Transaction = require("./Information/routes/02-KYT-System/Routes_Transaction.cjs");
 const KYT_DataEmail = require("./Information/routes/02-KYT-System/Routes_Dataemail.cjs");
 const KYT_SendMail = require("./Information/send_email/02-KYT-System/Send_Email.cjs");
@@ -51,6 +52,7 @@ const WKP_Transaction = require("./Information/routes/04-Work-Permit-System/Rout
 
 // Common
 app.use("/api/Common",Common);
+app.use("/api/Common/common_sendemail",Common_SendMail);
 
 // KYT System
 app.use("/api/KYT_System/Transection", KYT_Transaction);
