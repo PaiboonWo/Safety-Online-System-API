@@ -279,3 +279,61 @@ module.exports.GetForgotPassword = async function (req, res) {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+
+
+module.exports.GetFactoryissue = async function (req, res) {
+  let query = "";
+  try {
+    const { p_empid } = req.body;
+    console.log("GetFactoryissue", p_empid);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "CUSR".safety_all_007_comm_get_factory('${p_empid}')`;
+    const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_all_007_comm_get_factory  : ", filteredResult)
+    res.status(200).json(filteredResult);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+module.exports.GetCostCenterissue = async function (req, res) {
+  let query = "";
+  try {
+    const { p_empid } = req.body;
+    console.log("GetCostCenterissue", p_empid);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "CUSR".safety_all_008_comm_get_costcenter('${p_empid}')`;
+    const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_all_008_comm_get_costcenter  : ", filteredResult)
+    res.status(200).json(filteredResult);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports.GetJobType = async function (req, res) {
+  let query = "";
+  try {
+    const { p_jobtype_group } = req.body;
+    console.log("GetJobType", p_jobtype_group);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "GC".safety_all_005_comm_get_jobtype('${p_jobtype_group}')`;
+    const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_all_005_comm_get_jobtype  : ", filteredResult)
+    res.status(200).json(filteredResult);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
