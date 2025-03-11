@@ -17,6 +17,16 @@ router.post("/common_getroleuser", serverCommon.GetRoleUser);
 router.post("/common_getloginapprove", serverCommon.GetLoginApprove); 
 router.post("/common_getforgotpassword", serverCommon.GetForgotPassword); 
 router.post("/common_getjobtype", serverCommon.GetJobType); 
+router.post("/common_getapproveby", serverCommon.GetApproveBy); 
+router.post("/common_getfiifjoblistissue", serverCommon.GetFIIFJobListIssue); 
+router.post("/common_getkytjoblistissue", serverCommon.GetKYTJobListIssue); 
+router.post("/common_getfiifjoblistapprove", serverCommon.GetFIIFJobListApprove); 
+router.post("/common_getkytjoblistapprove", serverCommon.GetKYTJobListApprove); 
+
+
+
+
+
 
 
 

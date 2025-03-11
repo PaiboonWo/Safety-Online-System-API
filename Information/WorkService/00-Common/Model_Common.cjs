@@ -337,3 +337,94 @@ module.exports.GetJobType = async function (req, res) {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+module.exports.GetApproveBy = async function (req, res) {
+  let query = "";
+  try {
+    const { p_factory, p_cc, p_function, p_pagestatus, p_empid } = req.body;
+    console.log("GetApproveBy", p_factory,p_cc, p_function, p_pagestatus, p_empid);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "GC".safety_all_006_comm_get_approve_by('${p_factory}','${p_cc}','${p_function}','${p_pagestatus}','${p_empid}')`;
+    const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_all_006_comm_get_approve_by  : ", filteredResult)
+    res.status(200).json(filteredResult);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports.GetFIIFJobListIssue = async function (req, res) {
+  let query = "";
+  try {
+    const { p_empid } = req.body;
+    console.log("GetFIIFJobListIssue", p_empid);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "GC".safety_all_001_comm_fiif_get_joblistissue('${p_empid}')`;
+    const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_all_001_comm_fiif_get_joblistissue  : ", filteredResult)
+    res.status(200).json(filteredResult);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports.GetKYTJobListIssue = async function (req, res) {
+  let query = "";
+  try {
+    const { p_empid } = req.body;
+    console.log("GetKYTJobListIssue", p_empid);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "GC".safety_all_002_comm_kyt_get_joblistissue('${p_empid}')`;
+    const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_all_002_comm_kyt_get_joblistissue  : ", filteredResult)
+    res.status(200).json(filteredResult);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports.GetFIIFJobListApprove = async function (req, res) {
+  let query = "";
+  try {
+    const { p_userlogin } = req.body;
+    console.log("GetFIIFJobListApprove", p_userlogin);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "GC".safety_all_003_comm_fiif_get_joblistapprove('${p_userlogin}')`;
+    const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_all_003_comm_fiif_get_joblistapprove  : ", filteredResult)
+    res.status(200).json(filteredResult);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports.GetKYTJobListApprove = async function (req, res) {
+  let query = "";
+  try {
+    const { p_userlogin } = req.body;
+    console.log("GetKYTJobListApprove", p_userlogin);
+    const client = await ConnectPG_DB();
+    query += `SELECT * from "GC".safety_all_004_comm_kyt_get_joblistapprove('${p_userlogin}')`;
+    const result = await client.query(query);
+    const filteredResult = result.rows.map((row) => row.response);
+    await DisconnectPG_DB(client);
+    console.log("DATA SHOW safety_all_004_comm_kyt_get_joblistapprove  : ", filteredResult)
+    res.status(200).json(filteredResult);
+  } catch (error) {
+    writeLogError(error.message, query);
+    res.status(500).json({ message: error.message });
+  }
+};
