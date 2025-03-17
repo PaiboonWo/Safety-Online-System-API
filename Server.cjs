@@ -47,6 +47,7 @@ const FIIF_MasterList = require("./Information/routes/03-FIIF-System/Routes_Mast
 const FIIF_DataEmail = require("./Information/routes/03-FIIF-System/Routes_Dataemail.cjs");
 const FIIF_SendMail = require("./Information/send_email/03-FIIF-System/Send_Email.cjs");
 const FIIF_Common = require("./Information/routes/03-FIIF-System/Routes_Common.cjs");
+const FIIF_Report = require("./Information/routes/03-FIIF-System/Routes_Report.cjs");
 const WKP_MasterList = require("./Information/routes/04-Work-Permit-System/Routes_Masterlist.cjs");
 const WKP_Transaction = require("./Information/routes/04-Work-Permit-System/Routes_Transection.cjs");
 
@@ -66,6 +67,8 @@ app.use("/api/FIIF_System/MasterList", FIIF_MasterList);
 app.use("/api/FIIF_System/DataEmail", FIIF_DataEmail);
 app.use("/api/FIIF_System/SendEmail", FIIF_SendMail);
 app.use("/api/FIIF_System/Common", FIIF_Common);
+app.use("/api/FIIF_System/Report", FIIF_Report);
+
 
 // Work Permit System
 app.use("/api/WKP_System", WKP_MasterList);
