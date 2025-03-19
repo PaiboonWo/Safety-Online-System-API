@@ -36,8 +36,9 @@ module.exports.Report_Get_Datareportall = async function (req, res) {
           ky3: data.ky3,
           type: data.type,
           cmmt: data.cmmt,
-          sts: data.sts,
-          job: data.job
+          mac: data.mac,
+          job: data.job,
+          sts: data.sts
         };
       });
       
