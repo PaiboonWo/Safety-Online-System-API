@@ -73,5 +73,6 @@ COPY . .
 
 EXPOSE 5101
 
-CMD ["npm", "run", "dev"]
+# CMD ["npm", "run", "dev"]
+CMD ["node", "Server.cjs"]
 
