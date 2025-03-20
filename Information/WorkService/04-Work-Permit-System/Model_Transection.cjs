@@ -234,3 +234,87 @@ module.exports.GeteditIssueWKPItem = async function (req, res) {
         res.status(500).json({ message: error.message });
     }
 };
+
+module.exports.DeleTransIssueWKPAll = async function (req, res) {
+    var query = "";
+    try {
+        const { dataList } = req.body;
+        console.log("dataList", dataList);
+        const json_convertdata = JSON.stringify(dataList);
+        const client = await ConnectPG_DB();
+        query += `CALL "GC".safety_wkp_005_trans_dele_issuewkprecord('[${json_convertdata}]','')`;
+        const result = await client.query(query);
+        console.log("DATA SHOW wkp", result.rows)
+        if (result.rows.length > 0) {
+            res.status(200).json(result.rows);
+            DisconnectPG_DB(client);
+        }
+    } catch (error) {
+        writeLogError(error.message, query);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports.GetApprove1By = async function (req, res) {
+    let query = "";
+    try {
+        const { p_factory, p_cc, p_function, p_pagestatus, p_empid } = req.body;
+        const client = await ConnectPG_DB();
+        query += `SELECT * from "GC".safety_wkp_006_comm_getapprove1by('${p_cc}','${p_function}','${p_pagestatus}','${p_empid}')`;
+        const result = await client.query(query);
+        const filteredResult = result.rows.map((row) => row.response);
+        await DisconnectPG_DB(client);
+        res.status(200).json(filteredResult);
+    } catch (error) {
+        writeLogError(error.message, query);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports.GetApprove2By = async function (req, res) {
+    let query = "";
+    try {
+        const { p_factory, p_cc, p_function, p_pagestatus, p_empid } = req.body;
+        const client = await ConnectPG_DB();
+        query += `SELECT * from "GC".safety_wkp_006_comm_getapprove2by('${p_cc}','${p_function}','${p_pagestatus}','${p_empid}')`;
+        const result = await client.query(query);
+        const filteredResult = result.rows.map((row) => row.response);
+        await DisconnectPG_DB(client);
+        res.status(200).json(filteredResult);
+    } catch (error) {
+        writeLogError(error.message, query);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports.GetApprove3By = async function (req, res) {
+    let query = "";
+    try {
+        const { p_factory, p_cc, p_function, p_pagestatus, p_empid } = req.body;
+        const client = await ConnectPG_DB();
+        query += `SELECT * from "GC".safety_wkp_006_comm_getapprove3by('${p_cc}','${p_function}','${p_pagestatus}','${p_empid}')`;
+        const result = await client.query(query);
+        const filteredResult = result.rows.map((row) => row.response);
+        await DisconnectPG_DB(client);
+        res.status(200).json(filteredResult);
+    } catch (error) {
+        writeLogError(error.message, query);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports.GetApprove4By = async function (req, res) {
+    let query = "";
+    try {
+        const { p_factory, p_cc, p_function, p_pagestatus, p_empid } = req.body;
+        const client = await ConnectPG_DB();
+        query += `SELECT * from "GC".safety_wkp_006_comm_getapprove4by('${p_cc}','${p_function}','${p_pagestatus}','${p_empid}')`;
+        const result = await client.query(query);
+        const filteredResult = result.rows.map((row) => row.response);
+        await DisconnectPG_DB(client);
+        res.status(200).json(filteredResult);
+    } catch (error) {
+        writeLogError(error.message, query);
+        res.status(500).json({ message: error.message });
+    }
+};
