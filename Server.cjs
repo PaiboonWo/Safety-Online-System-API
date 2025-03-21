@@ -50,6 +50,8 @@ const FIIF_Common = require("./Information/routes/03-FIIF-System/Routes_Common.c
 const FIIF_Report = require("./Information/routes/03-FIIF-System/Routes_Report.cjs");
 const WKP_MasterList = require("./Information/routes/04-Work-Permit-System/Routes_Masterlist.cjs");
 const WKP_Transaction = require("./Information/routes/04-Work-Permit-System/Routes_Transection.cjs");
+const WKP_DataEmail = require("./Information/routes/04-Work-Permit-System/Routes_Dataemail.cjs");
+const WKP_SendMail = require("./Information/send_email/04-WKP-System/Send_Email.cjs");
 
 // Common
 app.use("/api/Common",Common);
@@ -73,6 +75,8 @@ app.use("/api/FIIF_System/Report", FIIF_Report);
 // Work Permit System
 app.use("/api/WKP_System", WKP_MasterList);
 app.use("/api/WKP_System/Tran", WKP_Transaction);
+app.use("/api/WKP_System/DataEmail", WKP_DataEmail);
+app.use("/api/WKP_System/SendEmail", WKP_SendMail);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
